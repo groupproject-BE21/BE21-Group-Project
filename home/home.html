@@ -71,31 +71,12 @@
     </section>
 
     <!-- Article Section -->
-    <!-- <div class="card" id="card" style="width: 18rem;">
-      <img src="" alt="artikel-2" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-      <img src="" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div> -->
     <div class="container-lg">
       <h2 class="mt-5 fw-bold">Artikel Terbaru</h2>
 
       <div class="row" id="article-list-homepage"></div>
     </div>
+
     <!-- Section Footer -->
     <footer>
       <div class="footer-container">
@@ -110,70 +91,43 @@
           </div>
       </div>
   </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script type="text/javascript">
 
-      const apiUrl = "https://64510cbaa322196911594987.mockapi.io/api/v1/articles";
-      function displayArticles() {
-        fetch(apiurl)
-        .then((response) => response.json())
-        .then((data) => {
-          const articleList = document.getElementById("article-list");
-          articleList.innerHTML = "";
-          data.forEach((article) => {
-            const card = document.createElement("div");
-            card.classList.add("col-md-6");
-            card.innerHTML = `
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="${article.image}" class="img-fluid rounded-start" />
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title">${article.title}</h5>
-                <p class="card-text fw-light">${article["preview-text"]}</p>
-                <a href="article-detail.html?id=${article.id}" class="btn btn-sm btn-outline-success">Baca Selengkapnya</a>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+
+  const apiUrl = "https://6453ddabe9ac46cedf31df15.mockapi.io/article";      
+
+  // Fetch Api for Card 
+  function displayArticlesHomepage() {
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const articleList = document.getElementById("article-list-homepage");
+        articleList.innerHTML = "";
+
+        data.slice(0, 6).forEach((article) => {
+          const card = document.createElement("div");
+          card.classList.add("col-md-6");
+          card.innerHTML = `
+              <div class="card mb-3">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="${article.image}" class="img-fluid h-100 rounded-start object-fit-content" style="max-height:"/>
               </div>
-            </div>
-            </div>
-          </div>
-          `;
-        articleList.appendChild(card);
-      });
-    });
-}
-
-function displayArticlesHomepage() {
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      const articleList = document.getElementById("article-list-homepage");
-      articleList.innerHTML = "";
-
-      data.slice(0, 6).forEach((article) => {
-        const card = document.createElement("div");
-        card.classList.add("col-md-6");
-        card.innerHTML = `
-            <div class="card mb-3">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="${article.image}" class="img-fluid h-100 rounded-start object-fit-content" style="max-height:"/>
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="fs-5 fw-bold">${article.title}</h5>
-                <p class="fw-lighter fs-6">${article["content"]}</p>
-                <a href="article\article.html?id=${article.id}" class="btn btn-sm btn-outline-success">Read more . .</a>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="fs-5 fw-bold">${article.title}</h5>
+                  <p class="fw-lighter fs-6">${article["content"]}</p>
+                  <a href="article\article.html?id=${article.id}" class="btn btn-sm btn-outline-success">Read more . .</a>
+                </div>
               </div>
-            </div>
-            </div>
-            </div>
-          `;
-        articleList.appendChild(card);
+              </div>
+              </div>
+            `;
+          articleList.appendChild(card);
+        });
       });
-    });
-}
+  }
     </script>
   </body>
 </html>
